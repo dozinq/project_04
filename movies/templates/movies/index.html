@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+  
+  <section id="header" class="text-center text-black d-flex align-items-center justify-content-center">
+    <h2>당신에게 어울리는 영화를 <br>추천해드립니다.</h2>
+  </section>
+
+  <section id="movie-list">
+    <div class="text-center my-5">
+      <h3>영화 목록</h3>
+      <hr class="title-underline mx-auto">
+    </div>
+    <div class="row">
+      {% for num in range_nums %}
+      {% if num == 4 %}
+        <div class="col-lg-3 offset-lg-3 col-md-4 col-sm-6 col-12 my-3">
+      {% else %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-3">
+      {% endif %}
+          <!-- card -->
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/600x840" class="card-img-top" alt="poster" data-bs-target="#movie-{{ num }}-modal" data-bs-toggle="modal">
+            <!-- modal -->
+            <div class="modal fade" id="movie-{{ num }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- carousel -->
+                    {% include 'movies/_carousel.html' %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">{% lorem 1 w random %}</h4>
+              <hr>
+              <p class="card-text">{% lorem 1 w random %}<br>{% lorem 3 w random %}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{% lorem 2 w random %}</small>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock content %}
